@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven
+Built-By: 1
+Build-Jdk: 1.6.0_21
+Extension-Name: copy-data-to-workspace-plugin
+Specification-Title: Copies data to workspace directory for each proje
+ ct build
+Implementation-Title: copy-data-to-workspace-plugin
+Implementation-Version: 1.0
+Group-Id: org.jvnet.hudson.plugins
+Short-Name: copy-data-to-workspace-plugin
+Long-Name: Copy data to workspace plugin
+Url: http://wiki.jenkins-ci.org/display/JENKINS/Copy+Data+To+Workspace
+ +Plugin
+Plugin-Version: 1.0
+Hudson-Version: 1.366
+Plugin-Developers: Nikita Zhelyakov:nzhelyakov:nzhelyakov@gmail.com
+

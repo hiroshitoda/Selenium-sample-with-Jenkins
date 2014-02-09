@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<hudson.plugins.selenium.PluginImpl plugin="selenium@2.3">
+  <port>4444</port>
+  <exclusionPatterns></exclusionPatterns>
+  <newSessionWaitTimeout>-1</newSessionWaitTimeout>
+  <throwOnCapabilityNotPresent>false</throwOnCapabilityNotPresent>
+  <hubLogLevel>INFO</hubLogLevel>
+  <rcDebug>false</rcDebug>
+  <rcLog></rcLog>
+  <configurations>
+    <hudson.plugins.selenium.configuration.global.SeleniumGlobalConfiguration>
+      <name>localhost</name>
+      <matcher class="hudson.plugins.selenium.configuration.global.matcher.MatchAllMatcher"/>
+      <configuration class="hudson.plugins.selenium.configuration.CustomWDConfiguration">
+        <port>4445</port>
+        <browsers>
+          <hudson.plugins.selenium.configuration.browser.webdriver.IEBrowser>
+            <maxInstances>1</maxInstances>
+            <version></version>
+            <protocol>WebDriver</protocol>
+            <name>internet explorer</name>
+          </hudson.plugins.selenium.configuration.browser.webdriver.IEBrowser>
+          <hudson.plugins.selenium.configuration.browser.webdriver.FirefoxBrowser>
+            <maxInstances>5</maxInstances>
+            <version></version>
+            <protocol>WebDriver</protocol>
+            <name>firefox</name>
+            <binary__path></binary__path>
+          </hudson.plugins.selenium.configuration.browser.webdriver.FirefoxBrowser>
+          <hudson.plugins.selenium.configuration.browser.webdriver.ChromeBrowser>
+            <maxInstances>5</maxInstances>
+            <version></version>
+            <protocol>WebDriver</protocol>
+            <name>chrome</name>
+            <server__binary></server__binary>
+          </hudson.plugins.selenium.configuration.browser.webdriver.ChromeBrowser>
+          <hudson.plugins.selenium.configuration.browser.webdriver.SafariBrowser>
+            <maxInstances>1</maxInstances>
+            <version></version>
+            <protocol>WebDriver</protocol>
+            <name>safari</name>
+          </hudson.plugins.selenium.configuration.browser.webdriver.SafariBrowser>
+        </browsers>
+        <display></display>
+      </configuration>
+    </hudson.plugins.selenium.configuration.global.SeleniumGlobalConfiguration>
+  </configurations>
+</hudson.plugins.selenium.PluginImpl>
