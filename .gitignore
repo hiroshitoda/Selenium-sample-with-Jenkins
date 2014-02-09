@@ -38,11 +38,6 @@ local.properties
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
-# Package Files #
-*.jar
-*.war
-*.ear
-
 target/**
 bin/jenkins/*.log
 bin/jenkins/jobs/**/nextBuildNumber
