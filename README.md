@@ -13,10 +13,10 @@ Jenkins で Selenium Grid 2 を動かすための簡易セットです。
 使い方
 =====
 
-1. Jenkins を起動してください。
+1. bin の下の、 IEDriverServer または ChromeDriver の ZIP ファイルを展開して、PATH の通っているディレクトリーにコピーしてください。
+2. Jenkins を起動してください。
     * Windows の場合: bin\run-jenkins.bat を実行。
     * Mac/Linux の場合: bin/run-jenkins.sh を実行。
-2. bin の下の、 IEDriverServer または ChromeDriver の ZIP ファイルを展開して、PATH の通っているディレクトリーにコピーしてください。
 3. http://localhost:8080/ にアクセスして、動かしたいジョブを実行してください。 JAVA_HOME を適切に指定すると、ジョブが実行されます。
 4. 実行するコードは、ローカルの Git リポジトリーから取得する設定になっています。コードを変更する場合は、ローカルの Git リポジトリーに対して git commit すれば OK です。
 
