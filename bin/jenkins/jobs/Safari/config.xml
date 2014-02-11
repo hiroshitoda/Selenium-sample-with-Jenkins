@@ -48,7 +48,9 @@ MacOS X: /System/Library/Frameworks/JavaVM.framework/Home
     <hudson.tasks.Maven>
       <targets>test</targets>
       <mavenName>3.1.1</mavenName>
-      <properties>browserName=safari</properties>
+      <properties>browserName=safari
+twitterUser=SeleniumJpDemo
+twitterPass=seleniumjp</properties>
       <usePrivateRepository>false</usePrivateRepository>
       <settings class="jenkins.mvn.DefaultSettingsProvider"/>
       <globalSettings class="jenkins.mvn.DefaultGlobalSettingsProvider"/>
