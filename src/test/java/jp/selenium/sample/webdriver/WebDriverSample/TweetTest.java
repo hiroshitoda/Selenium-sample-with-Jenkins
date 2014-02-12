@@ -11,9 +11,7 @@ import java.util.concurrent.TimeUnit;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -30,7 +28,6 @@ public class TweetTest {
 
     private WebDriver driver;
     private String baseUrl;
-    private boolean acceptNextAlert = true;
     private StringBuffer verificationErrors = new StringBuffer();
 
     @Before
@@ -107,6 +104,19 @@ public class TweetTest {
                 .cssSelector("#send-retweeted-retweet-email-dropdown > select.preference-dropdown");
         By emailPreference = By.cssSelector("select.email-preference");
 
+        By profile = By.linkText("プロフィール");
+        By userLocation = By.id("user_location");
+        By userUrl = By.id("user_url");
+        By userDescription = By.id("user_description");
+
+        By design = By.linkText("デザイン");
+        By theme1 = By.xpath("//form[@id='design-form']/fieldset/ul/li[1]/button");
+        By theme10 = By.xpath("//form[@id='design-form']/fieldset/ul/li[10]/button");
+        By bgPositionLeft = By.xpath("(//input[@name='user[profile_background_position]'])[1]");
+        By bgPositionCenter = By.xpath("(//input[@name='user[profile_background_position]'])[2]");
+        By bgColor = By.id("background_color_hex");
+        By linkColor = By.id("links_color_hex");
+
         driver.get(baseUrl + "login");
 
         // サインイン
@@ -117,7 +127,7 @@ public class TweetTest {
         driver.findElement(signIn).click();
 
         // 設定画面へ移動。時々タイミング的にドロップダウンを表示し損ねたらリトライ
-        while (driver.findElements(setting).size() == 0) {
+        while (!isElementPresent(setting)) {
             try {
                 Thread.sleep(2);
             } catch (InterruptedException e) {
@@ -195,6 +205,31 @@ public class TweetTest {
             driver.findElement(settingsSave).click();
         }
 
+        // 設定を初期状態に戻す(プロフィール)
+        driver.findElement(profile).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions
+                .visibilityOfElementLocated(userLocation));
+        driver.findElement(userLocation).clear();
+        driver.findElement(userUrl).clear();
+        driver.findElement(userDescription).clear();
+        if (driver.findElement(settingsSave).isEnabled()) {
+            driver.findElement(settingsSave).click();
+        }
+
+        // 設定を初期状態に戻す(デザイン)
+        driver.findElement(design).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions
+                .visibilityOfElementLocated(theme1));
+        driver.findElement(theme1).click();
+        driver.findElement(bgPositionLeft).click();
+        driver.findElement(bgColor).clear();
+        driver.findElement(bgColor).sendKeys("#C0DEED");
+        driver.findElement(linkColor).clear();
+        driver.findElement(linkColor).sendKeys("#0084B4");
+        if (driver.findElement(settingsSave).isEnabled()) {
+            driver.findElement(settingsSave).click();
+        }
+
         // ユーザー情報
         driver.findElement(userInfo).click();
         new Select(driver.findElement(userTimeZone))
@@ -208,7 +243,7 @@ public class TweetTest {
         driver.findElement(authPassword).sendKeys(password);
         driver.findElement(savePassword).click();
 
-        // 設定を初期状態に戻す(セキュリティとプライバシー)
+        // セキュリティとプライバシー
         driver.findElement(securityAndPrivacy).click();
         driver.findElement(userNoUsernameOnlyPasswordReset).click();
         driver.findElement(userProtected).click();
@@ -222,7 +257,7 @@ public class TweetTest {
         driver.findElement(authPassword).sendKeys(password);
         driver.findElement(savePassword).click();
 
-        // 設定を初期状態に戻す(メール通知)
+        // メール通知
         driver.findElement(mailNotification).click();
         new Select(driver.findElement(preference)).selectByVisibleText("誰でも");
         new Select(driver.findElement(favoriteMentionEmail))
@@ -239,8 +274,34 @@ public class TweetTest {
                 .selectByVisibleText("デイリーメールを送信");
         driver.findElement(settingsSave).click();
 
+        // プロフィール
+        driver.findElement(profile).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions
+                .visibilityOfElementLocated(userLocation));
+        driver.findElement(userLocation).clear();
+        driver.findElement(userLocation).sendKeys("目黒雅叙園");
+        driver.findElement(userUrl).clear();
+        driver.findElement(userUrl).sendKeys("http://www.selenium.jp");
+        driver.findElement(userDescription).clear();
+        driver.findElement(userDescription).sendKeys("デブサミ2014でデモ中です!");
+        driver.findElement(settingsSave).click();
+
+        // デザイン
+        driver.findElement(design).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions
+                .visibilityOfElementLocated(theme10));
+        driver.findElement(theme10).click();
+        driver.findElement(bgPositionCenter).click();
+        driver.findElement(bgColor).clear();
+        driver.findElement(bgColor).sendKeys("#ABABAB");
+        driver.findElement(linkColor).clear();
+        driver.findElement(linkColor).sendKeys("#44BB33");
+        if (driver.findElement(settingsSave).isEnabled()) {
+            driver.findElement(settingsSave).click();
+        }
+
         // ホーム画面へ移動。時々タイミング的に遷移し損ねたらリトライ
-        while (driver.findElements(tweetBox).size() == 0) {
+        while (!isElementPresent(tweetBox)) {
             try {
                 Thread.sleep(2);
             } catch (InterruptedException e) {
@@ -281,27 +342,4 @@ public class TweetTest {
         }
     }
 
-    private boolean isAlertPresent() {
-        try {
-            driver.switchTo().alert();
-            return true;
-        } catch (NoAlertPresentException e) {
-            return false;
-        }
-    }
-
-    private String closeAlertAndGetItsText() {
-        try {
-            Alert alert = driver.switchTo().alert();
-            String alertText = alert.getText();
-            if (acceptNextAlert) {
-                alert.accept();
-            } else {
-                alert.dismiss();
-            }
-            return alertText;
-        } finally {
-            acceptNextAlert = true;
-        }
-    }
 }
