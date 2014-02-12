@@ -47,7 +47,7 @@ public class TweetTest {
     }
 
     @Test
-    public void testSample() throws Exception {
+    public void testTweet() throws Exception {
         Properties properties = System.getProperties();
         String userId = properties.getProperty("twitterUser");
         String password = properties.getProperty("twitterPass");
@@ -110,6 +110,8 @@ public class TweetTest {
         driver.get(baseUrl + "login");
 
         // サインイン
+        new WebDriverWait(driver, 60).until(ExpectedConditions
+                .visibilityOfElementLocated(sessionUserOrEmail));
         driver.findElement(sessionUserOrEmail).sendKeys(userId);
         driver.findElement(sessionPassword).sendKeys(password);
         driver.findElement(signIn).click();
@@ -237,8 +239,16 @@ public class TweetTest {
                 .selectByVisibleText("デイリーメールを送信");
         driver.findElement(settingsSave).click();
 
+        // ホーム画面へ移動。時々タイミング的に遷移し損ねたらリトライ
+        while (driver.findElements(tweetBox).size() == 0) {
+            try {
+                Thread.sleep(2);
+            } catch (InterruptedException e) {
+            }
+            driver.findElement(home).click();
+        }
+
         // ツイート
-        driver.findElement(home).click();
         long timeMillisEnd = System.currentTimeMillis();
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
         driver.findElement(tweetBox).sendKeys(
