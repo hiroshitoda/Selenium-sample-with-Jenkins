@@ -14,9 +14,9 @@
       <parameterDefinitions>
         <hudson.model.StringParameterDefinition>
           <name>JAVA_HOME</name>
-          <description>Windows: C:\Program Files\Java&lt;br /&gt;
-MacOS X: /System/Library/Frameworks/JavaVM.framework/Home
-</description>
+          <description>（例）
+Windows: C:\Program Files\Java\jdk1.7.0_51&lt;br /&gt;
+MacOS X: /System/Library/Frameworks/JavaVM.framework/Home</description>
           <defaultValue></defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
