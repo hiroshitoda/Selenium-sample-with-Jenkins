@@ -38,7 +38,7 @@ public class TweetTest {
 
         driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"),
                 capabilities);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
         baseUrl = "http://twitter.com/";
     }

@@ -16,6 +16,8 @@ public class SimpleTest
     private String baseUrl;
     private boolean acceptNextAlert = true;
     private StringBuffer verificationErrors = new StringBuffer();
+    private int width = 1024;
+    private int height = 768;
 
     @Before
     public void setUp() throws Exception
@@ -29,6 +31,7 @@ public class SimpleTest
                 capabilities
                 );
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        driver.manage().window().setSize(new Dimension(width, height));
 
         baseUrl = "http://www.adventar.org/";
     }
