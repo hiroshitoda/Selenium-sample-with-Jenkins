@@ -38,8 +38,11 @@ local.properties
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
+.classpath
+.project
 target/**
 bin/jenkins/*.log
+bin/jenkins/queue.xml
 bin/jenkins/jobs/**/nextBuildNumber
 bin/jenkins/jobs/**/builds/**
 bin/jenkins/jobs/**/workspace/**
