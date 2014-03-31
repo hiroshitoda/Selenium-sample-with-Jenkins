@@ -1,24 +1,18 @@
 package jp.selenium.sample.webdriver.WebDriverSample;
 
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 import java.net.URL;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  * Twitterの設定変更と自動ツイートを行うテスト。 Twitterの言語設定を日本語にしていないとうまく動作しません。
@@ -43,6 +37,7 @@ public class TweetTest {
         baseUrl = "http://twitter.com/";
     }
 
+    /* 有効なTwitterアカウントをシステムプロパティに指定して使ってください。
     @Test
     public void testTweet() throws Exception {
         Properties properties = System.getProperties();
@@ -54,13 +49,13 @@ public class TweetTest {
         if (password == null) {
             throw new RuntimeException("twitterPassシステムプロパティが指定されていません");
         }
-        String tweetMsg = "デブサミ2014 コミュニティブースのデモ作成中..";
+        String tweetMsg = "Selenium サンプルから投稿中... http://bit.ly/1e3mFQW";
 
         By sessionUserOrEmail = By
                 .cssSelector("div.clearfix.field > input[name=\"session[username_or_email]\"]");
         By sessionPassword = By
                 .cssSelector("div.clearfix.field > input[name=\"session[password]\"]");
-        By signIn = By.xpath("(//button[@type='submit'])[3]");
+        By signIn = By.xpath("(//button[@type='submit'])[1]");
         By userDropdownToggle = By
                 .xpath("//a[@id='user-dropdown-toggle']/span");
         By setting = By.linkText("設定");
@@ -323,6 +318,7 @@ public class TweetTest {
         driver.findElement(userDropdownToggle).click();
         driver.findElement(signOut).click();
     }
+    */
 
     @After
     public void tearDown() throws Exception {
