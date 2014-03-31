@@ -1,2 +1,2 @@
-set JENKINS_HOME=.\jenkins
-java -jar jenkins\jenkins.war --webroot=.\jenkins
+set JENKINS_HOME=%~dp0\jenkins
+java -jar %JENKINS_HOME%\jenkins.war --webroot=%JENKINS_HOME%\
