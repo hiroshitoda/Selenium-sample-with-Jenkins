@@ -1,13 +1,23 @@
 package jp.selenium.sample.webdriver.WebDriverSample;
 
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
+
 import java.net.URL;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
-import org.junit.*;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
-import org.openqa.selenium.*;
-import org.openqa.selenium.remote.*;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class SimpleTest
 {
@@ -25,7 +35,7 @@ public class SimpleTest
         Properties properties = System.getProperties();
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setBrowserName(properties.getProperty("browserName"));
-        
+
         driver = new RemoteWebDriver(
                 new URL("http://localhost:4444/wd/hub"),
                 capabilities
@@ -45,11 +55,11 @@ public class SimpleTest
         driver.findElement(By.cssSelector("a.mod-calendar-entryLink > img.mod-userIcon")).click();
         driver.findElement(By.id("q")).clear();
         driver.findElement(By.id("q")).sendKeys("selenium");
-        driver.findElement(By.id("search-button")).click();
+        driver.findElement(By.name("commit")).click();
 
         String expected = "seleniumの検索結果";
         String actual = driver.findElement(By.className("page-title")).getText();
-        
+
         assertThat(actual, is(expected));
     }
 

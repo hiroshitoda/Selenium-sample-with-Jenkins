@@ -38,13 +38,23 @@ local.properties
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
+.classpath
+.project
 target/**
+bin/jenkins/.owner
 bin/jenkins/*.log
+bin/jenkins/hudson.model.UpdateCenter.xml
+bin/jenkins/nodeMonitors.xml
+bin/jenkins/queue.xml
 bin/jenkins/jobs/**/nextBuildNumber
 bin/jenkins/jobs/**/builds/**
 bin/jenkins/jobs/**/workspace/**
 bin/jenkins/jobs/**/lastStable
 bin/jenkins/jobs/**/lastSuccessful
+bin/jenkins/plugins/**/classes.jar
+bin/jenkins/plugins/**/licenses.xml
+bin/jenkins/plugins/**/pom.properties
+bin/jenkins/plugins/**/pom.xml
 bin/webdriver/chromedriver.exe
 bin/webdriver/chromedriver
 bin/webdriver/IEDriverServer.exe
